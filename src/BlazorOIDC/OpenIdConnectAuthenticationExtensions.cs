@@ -16,6 +16,8 @@ namespace BlazorOIDC
             services.AddSingleton<OpenIdConnectRedirectProvider>();
             services.AddSingleton<ITokenProvider, DefaultTokenProvider>();
             services.AddScoped<OpenIdConnectAuthenticationStateProvider>();
+
+            return services;
         }
     }
 }

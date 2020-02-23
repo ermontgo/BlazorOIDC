@@ -13,11 +13,11 @@ namespace BlazorOIDC
         private readonly NavigationManager navigationManager;
         private readonly OpenIdConnectMetadataConfigurationOptions options;
 
-        public OpenIdConnectRedirectProvider(IMetadataService metadataService, NavigationManager navigationManager, IOptions<OpenIdConnectMetadataConfigurationOptions> options)
+        public OpenIdConnectRedirectProvider(IMetadataService metadataService, NavigationManager navigationManager, OpenIdConnectMetadataConfigurationOptions options)
         {
             this.metadataService = metadataService;
             this.navigationManager = navigationManager;
-            this.options = options.Value;
+            this.options = options;
         }
 
         public async Task RedirectAsync()

@@ -24,7 +24,7 @@ namespace BlazorOIDC
                 await tokenProvider.InitializeAsync(uri.Fragment);
             }
 
-            if (authenticationState == null)
+            if (authenticationState == null && tokenProvider.Token != null)
             {
                 JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
                 var user = handler.ValidateToken(tokenProvider.Token, new TokenValidationParameters() { ValidateAudience = false, ValidateIssuer = false, ValidateLifetime = true }, out SecurityToken _);

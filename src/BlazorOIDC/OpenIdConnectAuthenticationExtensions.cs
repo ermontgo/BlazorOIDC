@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +16,7 @@ namespace BlazorOIDC
             services.AddSingleton<IMetadataService, OpenIdConnectMetadataService>();
             services.AddSingleton<OpenIdConnectRedirectProvider>();
             services.AddSingleton<ITokenProvider, DefaultTokenProvider>();
-            services.AddScoped<OpenIdConnectAuthenticationStateProvider>();
+            services.AddScoped<AuthenticationStateProvider, OpenIdConnectAuthenticationStateProvider>();
 
             return services;
         }

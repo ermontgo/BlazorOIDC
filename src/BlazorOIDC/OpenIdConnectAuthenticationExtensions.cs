@@ -10,7 +10,7 @@ namespace BlazorOIDC
         public static IServiceCollection UseOpenIdConnectAuthentication(this IServiceCollection services, string oidcServer, string clientId, params string[] scopes)
         {
             var options = new OpenIdConnectMetadataConfigurationOptions($"{oidcServer}/.well-known/openid-configuration", clientId, scopes);
-            services.ConfigureOptions(options);
+            services.AddSingleton(options);
 
             services.AddSingleton<IMetadataService, OpenIdConnectMetadataService>();
             services.AddSingleton<OpenIdConnectRedirectProvider>();

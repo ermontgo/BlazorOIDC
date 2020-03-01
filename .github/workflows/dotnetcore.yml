@@ -16,10 +16,10 @@ jobs:
     - name: Build BlazorOIDC with dotnet
       run: dotnet build --configuration Release src/BlazorOIDC.sln --version-suffix prerelease-$(date +%Y%m%d%H%M%S)
     - name: Package BlazorOIDC
-      run: dotnet pack --configuration Release src/BlazorOIDC.sln --version-suffix prerelease-$(date +%Y%m%d%H%M%S) -o ../artifacts/
+      run: dotnet pack --configuration Release src/BlazorOIDC.sln --version-suffix prerelease-$(date +%Y%m%d%H%M%S) -o artifacts/
     - name: Publish All
       run: |
-           for f in src/artifacts/*.nupkg
+           for f in artifacts/*.nupkg
            do
              dotnet nuget push $f -k ${NUGET_TOKEN} -s https://api.nuget.org/v3/index.json
            done

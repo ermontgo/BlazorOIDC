@@ -11,23 +11,23 @@ namespace BlazorOIDC
 {
     public class OpenIdConnectAuthenticationStateProvider : AuthenticationStateProvider
     {
-        [Inject] private NavigationManager UriHelper { get; set; }
-        [Inject] private ITokenProvider tokenProvider { get; set; }
+        [Inject] public NavigationManager UriHelper { get; set; }
+        [Inject] public ITokenProvider TokenProvider { get; set; }
 
         private AuthenticationState authenticationState;
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            if (!tokenProvider.IsInitialized)
+            if (!TokenProvider.IsInitialized)
             {
                 Uri uri = new Uri(UriHelper.Uri);
-                await tokenProvider.InitializeAsync(uri.Fragment);
+                await TokenProvider.InitializeAsync(uri.Fragment);
             }
 
-            if (authenticationState == null && tokenProvider.Token != null)
+            if (authenticationState == null && TokenProvider.Token != null)
             {
                 JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-                var user = handler.ValidateToken(tokenProvider.Token, new TokenValidationParameters() { ValidateAudience = false, ValidateIssuer = false, ValidateLifetime = true }, out SecurityToken _);
+                var user = handler.ValidateToken(TokenProvider.Token, new TokenValidationParameters() { ValidateAudience = false, ValidateIssuer = false, ValidateLifetime = true }, out SecurityToken _);
 
                 authenticationState = new AuthenticationState(user);
             }

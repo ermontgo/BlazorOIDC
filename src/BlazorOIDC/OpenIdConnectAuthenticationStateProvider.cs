@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +37,10 @@ namespace BlazorOIDC
                 var user = handler.ValidateToken(TokenProvider.Token, new TokenValidationParameters() { ValidateAudience = false, ValidateIssuer = false, ValidateLifetime = true }, out SecurityToken _);
 
                 authenticationState = new AuthenticationState(user);
+            }
+            else
+            {
+                return new AuthenticationState(ClaimsPrincipal.Current);
             }
 
             return authenticationState;

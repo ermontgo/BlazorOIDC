@@ -40,7 +40,7 @@ namespace BlazorOIDC
             }
             else
             {
-                return new AuthenticationState(ClaimsPrincipal.Current);
+                return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
             }
 
             return authenticationState;

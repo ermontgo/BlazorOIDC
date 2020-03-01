@@ -24,6 +24,8 @@ namespace BlazorOIDC
             if (metadata == null)
             {
                 var disco = await client.GetDiscoveryDocumentAsync(options.MetadataUrl);
+
+                if (disco.IsError) throw new AuthenticationFailedException(disco.Error);
                 metadata = new OpenIdConnectMetadata() { AuthorizeEndpoint = disco.AuthorizeEndpoint, Issuer = disco.Issuer, TokenEndpoint = disco.TokenEndpoint };
             }
 

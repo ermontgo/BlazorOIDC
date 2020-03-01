@@ -11,10 +11,16 @@ namespace BlazorOIDC
 {
     public class OpenIdConnectAuthenticationStateProvider : AuthenticationStateProvider
     {
-        [Inject] public NavigationManager UriHelper { get; set; }
-        [Inject] public ITokenProvider TokenProvider { get; set; }
+        public NavigationManager UriHelper { get; set; }
+        public ITokenProvider TokenProvider { get; set; }
 
         private AuthenticationState authenticationState;
+
+        public OpenIdConnectAuthenticationStateProvider(NavigationManager uriHelper, ITokenProvider tokenProvider)
+        {
+            UriHelper = uriHelper;
+            TokenProvider = tokenProvider;
+        }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {

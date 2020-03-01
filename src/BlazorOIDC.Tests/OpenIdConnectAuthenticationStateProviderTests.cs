@@ -18,11 +18,7 @@ namespace BlazorOIDC.Tests
             var uriHelper = new MockNavigationManager();
             uriHelper.SetUri("http://www.yahoo.com/", "http://www.yahoo.com/");
 
-            var provider = new OpenIdConnectAuthenticationStateProvider()
-            {
-                UriHelper = uriHelper,
-                TokenProvider = tokenProvider
-            };
+            var provider = new OpenIdConnectAuthenticationStateProvider(uriHelper, tokenProvider);
 
             await provider.GetAuthenticationStateAsync();
         }

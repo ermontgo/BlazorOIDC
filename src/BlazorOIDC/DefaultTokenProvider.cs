@@ -15,9 +15,9 @@ namespace BlazorOIDC
         public async Task InitializeAsync(string parameters)
         {
             var fragmentParameters = BuildParameters(parameters);
-            if (fragmentParameters.ContainsKey(ResponseType))
+            if (fragmentParameters.ContainsKey("access_token"))
             {
-                Token = fragmentParameters[ResponseType];
+                Token = fragmentParameters["access_token"];
             }
 
             IsInitialized = true;

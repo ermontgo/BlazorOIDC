@@ -14,8 +14,8 @@ namespace BlazorOIDC
             services.AddSingleton(options);
 
             services.AddSingleton<IMetadataService, OpenIdConnectMetadataService>();
-            services.AddSingleton<OpenIdConnectRedirectProvider>();
             services.AddSingleton<ITokenProvider, DefaultTokenProvider>();
+            services.AddSingleton<OpenIdConnectRedirectProvider>();
             services.AddScoped<AuthenticationStateProvider, OpenIdConnectAuthenticationStateProvider>();
 
             return services;

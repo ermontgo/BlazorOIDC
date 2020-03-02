@@ -7,8 +7,9 @@ namespace BlazorOIDC
 {
     public interface ITokenProvider
     {
-        string Token { get; set; }
-        bool IsInitialized { get; set; }
+        string Token { get; }
+        bool IsInitialized { get; }
+        string ResponseType { get; }
 
         Task InitializeAsync(string parameters);
     }

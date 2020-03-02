@@ -8,15 +8,16 @@ namespace BlazorOIDC
 {
     public class DefaultTokenProvider : ITokenProvider
     {
-        public string Token { get; set; }
-        public bool IsInitialized { get; set; }
+        public string Token { get; protected set; }
+        public bool IsInitialized { get; protected set; }
+        public string ResponseType => "token";
 
         public async Task InitializeAsync(string parameters)
         {
             var fragmentParameters = BuildParameters(parameters);
-            if (fragmentParameters.ContainsKey("id_token"))
+            if (fragmentParameters.ContainsKey(ResponseType))
             {
-                Token = fragmentParameters["id_token"];
+                Token = fragmentParameters[ResponseType];
             }
 
             IsInitialized = true;

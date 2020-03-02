@@ -29,6 +29,8 @@ namespace BlazorOIDC.Tests
         public string Token { get; set; }
         public bool IsInitialized { get; set; }
 
+        public string ResponseType => "mock_token";
+
         public async Task InitializeAsync(string parameters)
         {
             

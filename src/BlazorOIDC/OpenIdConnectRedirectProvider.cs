@@ -28,5 +28,7 @@ namespace BlazorOIDC
             var path = Uri.EscapeUriString(navigationManager.BaseUri);
             navigationManager.NavigateTo($"{metadata.AuthorizeEndpoint}?client_id={options.ClientId}&redirect_uri={path}&scope={Uri.EscapeUriString(string.Join(" ", options.Scopes))}&response_type={Uri.EscapeUriString(tokenProvider.ResponseType)}&prompt=login");
         }
+
+        public bool IsUserInitialized => tokenProvider.IsInitialized;
     }
 }

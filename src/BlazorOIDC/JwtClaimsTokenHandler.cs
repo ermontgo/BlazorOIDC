@@ -9,6 +9,13 @@ namespace BlazorOIDC
 {
     internal class JwtClaimsTokenHandler : JwtSecurityTokenHandler
     {
+        // Fixes linker miss, per https://github.com/mono/linker/issues/870
+        static JwtClaimsTokenHandler()
+        {
+            _ = new JwtHeader();
+            _ = new JwtPayload();
+        }
+
         public JwtClaimsTokenHandler()
         {
             InboundClaimTypeMap = new Dictionary<string, string>();

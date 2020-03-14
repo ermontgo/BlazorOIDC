@@ -14,13 +14,17 @@ namespace BlazorOIDC.Tests
         [TestMethod()]
         public async Task GetAuthenticationStateAsyncTestAsync()
         {
-            var tokenProvider = new MockTokenProvider();
+            var tokenProvider = new MockTokenProvider() { Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE4MTYyMzkwMjJ9.DYTQuvkWQ3CJi34H7pvb21dtcnVZPbTzIRJLXZO_UIg" };
             var uriHelper = new MockNavigationManager();
             uriHelper.SetUri("http://www.yahoo.com/", "http://www.yahoo.com/");
 
             var provider = new OpenIdConnectAuthenticationStateProvider(uriHelper, tokenProvider);
 
-            await provider.GetAuthenticationStateAsync();
+            var user = await provider.GetAuthenticationStateAsync();
+
+            Assert.IsNotNull(user);
+            Assert.IsTrue(user.User.Identity.IsAuthenticated);
+            Assert.AreEqual("1234567890", user.User.FindFirst("sub").Value);
         }
     }
 

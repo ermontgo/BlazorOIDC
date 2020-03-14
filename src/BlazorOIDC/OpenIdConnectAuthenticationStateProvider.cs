@@ -33,8 +33,8 @@ namespace BlazorOIDC
 
             if (authenticationState == null && TokenProvider.Token != null)
             {
-                JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-                var user = handler.ValidateToken(TokenProvider.Token, new TokenValidationParameters() { ValidateAudience = false, ValidateIssuer = false, ValidateLifetime = true }, out SecurityToken _);
+                JwtClaimsTokenHandler handler = new JwtClaimsTokenHandler();
+                var user = handler.ReadUnverifiedIdentityFromToken(TokenProvider.Token);
 
                 authenticationState = new AuthenticationState(user);
             }

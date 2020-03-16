@@ -25,7 +25,7 @@ namespace BlazorOIDC
         public async Task RedirectAsync()
         {
             var metadata = await metadataService.FetchMetadataAsync();
-            var path = Uri.EscapeUriString(navigationManager.BaseUri);
+            var path = Uri.EscapeUriString(navigationManager.BaseUri + options.RedirectPath);
             navigationManager.NavigateTo($"{metadata.AuthorizeEndpoint}?client_id={options.ClientId}&redirect_uri={path}&scope={Uri.EscapeUriString(string.Join(" ", options.Scopes))}&response_type={Uri.EscapeUriString(tokenProvider.ResponseType)}&prompt=login");
         }
 
